@@ -202,7 +202,7 @@
       "location": "[resourceGroup().location]",
       "apiVersion": "2020-03-01",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/routeTables', variables('RT-Name1'))]",
+        //"[resourceId('Microsoft.Network/routeTables', variables('RT-Name1'))]",
         "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSG-Name1'))]"
       ],
       "tags": {
@@ -222,9 +222,9 @@
               "networkSecurityGroup": {
                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSG-Name1'))]"
               },
-              "routeTable": {
-                "id": "[resourceId('Microsoft.Network/routeTables', variables('RT-Name1'))]"
-              },
+              //"routeTable": {
+                //"id": "[resourceId('Microsoft.Network/routeTables', variables('RT-Name1'))]"
+              //},
               "serviceEndpoints": "[variables('Subnet_serviceEndpoints')]",
               "privateEndpointNetworkPolicies": "Enabled",
               "privateLinkServiceNetworkPolicies": "Enabled"
@@ -237,9 +237,9 @@
               "networkSecurityGroup": {
                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSG-Name1'))]"
               },
-              "routeTable": {
-                "id": "[resourceId('Microsoft.Network/routeTables', variables('RT-Name1'))]"
-              },
+              //"routeTable": {
+                //"id": "[resourceId('Microsoft.Network/routeTables', variables('RT-Name1'))]"
+              //},
               "serviceEndpoints": "[variables('Subnet_serviceEndpoints')]",
               "privateEndpointNetworkPolicies": "Enabled",
               "privateLinkServiceNetworkPolicies": "Enabled"
@@ -272,7 +272,7 @@
       "location": "[resourceGroup().location]",
       "apiVersion": "2020-03-01",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/routeTables', variables('RT-Name1'))]",
+        //"[resourceId('Microsoft.Network/routeTables', variables('RT-Name1'))]",
         "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSG-Name2'))]"
       ],
       "tags": {
@@ -292,9 +292,9 @@
               "networkSecurityGroup": {
                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSG-Name2'))]"
               },
-              "routeTable": {
-                "id": "[resourceId('Microsoft.Network/routeTables', variables('RT-Name1'))]"
-              },
+              //"routeTable": {
+                //"id": "[resourceId('Microsoft.Network/routeTables', variables('RT-Name1'))]"
+              //},
               "serviceEndpoints": "[variables('Subnet_serviceEndpoints')]",
               "privateEndpointNetworkPolicies": "Enabled",
               "privateLinkServiceNetworkPolicies": "Enabled"
@@ -307,9 +307,9 @@
               "networkSecurityGroup": {
                 "id": "[resourceId('Microsoft.Network/networkSecurityGroups', variables('NSG-Name2'))]"
               },
-              "routeTable": {
-                "id": "[resourceId('Microsoft.Network/routeTables', variables('RT-Name1'))]"
-              },
+              //"routeTable": {
+                //"id": "[resourceId('Microsoft.Network/routeTables', variables('RT-Name1'))]"
+              //},
               "serviceEndpoints": "[variables('Subnet_serviceEndpoints')]",
               "privateEndpointNetworkPolicies": "Enabled",
               "privateLinkServiceNetworkPolicies": "Enabled"
@@ -491,7 +491,7 @@
       "name": "[variables('AG-Name')]",
       "location": "[resourceGroup().location]",
       "dependsOn": [
-        "[resourceId('Microsoft.Network/publicIpAddresses', variables('publicIpAddressName1'))]",
+        //"[resourceId('Microsoft.Network/publicIpAddresses', variables('publicIpAddressName1'))]",
         "[resourceId('Microsoft.Network/applicationGatewayWebApplicationFirewallPolicies', variables('AppGatewayPolicyName'))]",
         "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('VN-Name1'), variables('VN-Name1Subnet1Name'))]"
       ],
