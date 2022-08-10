@@ -36,7 +36,7 @@ az vm image accept-terms --offer 'kali-linux' --publisher 'kali-linux' --plan 'k
 az vm image terms accept --offer 'ntg_kali_linux' --publisher 'ntegralinc1586961136942' --plan 'ntg_kali_linux_2022'
 
 # This deployment shd create the hub virtual network and the application gateway 
-az deployment group create -g $RG_NETWORK_NAME -n $DEPLOYMENT_NAME -f DeploymentTemplates/AzNetSecdeploy_Juice-Shop_Modified.json -p DeploymentTemplates/AzNetSecdeploy_Juice-Shop.parameters.json
+az deployment group create -g $RG_NETWORK_NAME -n $DEPLOYMENT_NAME -f DeploymentTemplates/AzNetSecdeploy_Webapp.json -p DeploymentTemplates/AzNetSecdeploy_Webapp.parameters.json
 
 # query the required outputs from each of the deployments
 # az deployment group show -g $RG_NETWORK_NAME -n $DEPLOYMENT_NAME --query "properties.outputs" -o json > hubdeployment-outputs.json
