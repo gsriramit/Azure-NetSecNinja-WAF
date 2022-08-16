@@ -54,8 +54,24 @@ Reason for using an Ubuntu machine ->
 #### Basic Setup Information
 1. Use an Ubuntu Image from the list of images available for the VMs available in Azure. The template uses the latest version of Ubuntu 20.04
    - The template uses a "Standard_D4s_v3" sized machines
-2. Create a public IP at the instance level and modify the NSG to allow SSH (**only from your client IP**)
-   - This step is required to SSH into the machine and execute a bunch of commands 
-4. 
+2. Create a bastion host
+   - This step is required to SSH into the machine and execute a bunch of commands to enable xRDP on the machine
+   - Bastion seems to only support SSH for linux machines. Support for RDP through Bastion has been a requested feature but is not yet available
+3. xRDP can be enabled for the machine using the instructions in this article
+   - https://docs.microsoft.com/en-us/azure/virtual-machines/linux/use-remote-desktop?tabs=azure-cli
+4. Once xRDP has been enabled, the bastion host can be deleted (for cost-saving purposes)
+   - Create a public IP at the instance level and modify the NSG to allow SSH to this machine's public IP (**only from your client IP**) 
+5. Set up the Ubuntu Machine for Vulnerability assessment and Exploitation
+   - Installation of Open VAS on Ubuntu
+     - https://www.techrepublic.com/article/how-to-install-the-openvas-vulnerability-scanner-on-ubuntu-16-04
+   - Installation of other security tools on Ubuntu (Official forum)
+     - https://help.ubuntu.com/community/InstallingSecurityTools
+6. Once the necessary tools have been installed, the machine can be generalized and a managed image can be created from it
+   - Capture the image of the machine after it has been generalized
+	  - Save the managed image (Compute Image Gallery is another option)
+	  - References: https://docs.microsoft.com/en-us/azure/virtual-machines/windows/capture-image-resource
+	  - https://docs.microsoft.com/en-us/azure/virtual-machines/generalize
+     - Creating a VM from the managed image (PowerShell) - https://docs.microsoft.com/en-us/azure/virtual-machines/windows/create-vm-generalized-managed
+
 
 
