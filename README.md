@@ -76,10 +76,22 @@ Reason for using an Ubuntu machine ->
      - Creating a VM from the managed image (PowerShell) - https://docs.microsoft.com/en-us/azure/virtual-machines/windows/create-vm-generalized-managed
 
 ## Execution of the Lab Steps
+*Links to the lab steps*
+1. Reconnaissance - https://techcommunity.microsoft.com/t5/azure-network-security-blog/part-2-reconnaissance-playbook-azure-waf-security-protection-and/ba-p/2030751
+2. Vulnerability Exploitation Playbook (XSS) - https://techcommunity.microsoft.com/t5/azure-network-security-blog/part-3-vulnerability-exploitation-playbook-azure-waf-security/ba-p/2031047
+3. Data Disclosure and Exfiltration Playbook (SQLi) - https://techcommunity.microsoft.com/t5/azure-network-security-blog/part-4-data-disclosure-and-exfiltration-playbook-azure-waf/ba-p/2031269
 
 ## Installation of the Log Analytics Workbook
+Azure Monitor Workbook for WAF - https://github.com/Azure/Azure-Network-Security/tree/master/Azure%20WAF/Workbook%20-%20WAF%20Monitor%20Workbook
+
+### Understanding Anomaly Score based attack detection/prevention
+
 
 ## Sentinel Integration
+Integrating Azure WAF with Microsoft Sentinel i.e. configuring Azure Web Application Firewall (WAF) as a data source is an important step for us to capture all important **signals** , check for false positives, identify the patterns and possibly determine a mitigation plan based on the type of the attack detected.  
+Data generated from the Application Gateway and/or the Azure Front Door logs are now available in the diagnotics table in the log analytics workspace.
+*Configuration Reference*: https://techcommunity.microsoft.com/t5/azure-network-security-blog/integrating-azure-web-application-firewall-with-azure-sentinel/ba-p/1720306
+
 
 ### Sentinel KQL Queries
 
