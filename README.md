@@ -10,7 +10,7 @@ The deployment templates used in this repository are modified from the original 
 | Virtual Network-2            | VN2(Spoke1) has 2 Subnets 10.0.27.0/26 & 10.0.27.64/26 peered to VN2                                   |
 | Virtual Network-3            | VN3(Spoke2) has 2 Subnets 10.0.28.0/26 & 10.0.28.64/26 peered to VN1                                   |
 | PublicIPAddress-1            | Static Public IP address for Application gateway                                                       |
-| Virtual Machine-1            | Windows 10 Machine connected to VN2(subnet1)                                                           |
+| Virtual Machine-1            | Ubuntu 20.0.4 machines deployed in the Spoke 1 Network                                                 |
 | Application Gateway v2 (WAF) | Pre-configured to publish webapp on HTTP on Public Interface                                           |
 | Frontdoor                    | Pre-configured designer with Backend pool as Applicaion gateway public interface                       |
 | WebApp(PaaS)                 | Pre-configured app for Frontdoor and Application Gateway WAF testing                                   |
@@ -28,4 +28,5 @@ The procedure is available in this [article](https://docs.microsoft.com/en-us/az
 **Note** :All the diagnostics logs from the resources that have the diagnostics settings enabled will now be available for the Sentinel queries
 
 ## Replacement of KALI with a basic Ubuntu Machine
+The original template deploys a KALI Linux machine that can be used to perform Vulnerability Assessment and exploitation of Publicly exposed applications (in the context of this repository)
 
