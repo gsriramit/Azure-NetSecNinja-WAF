@@ -16,6 +16,8 @@ The deployment templates used in this repository are modified from the original 
 | WebApp(PaaS)                 | Pre-configured app for Frontdoor and Application Gateway WAF testing                                   |
 | Diagnostics Settings         | Enabled for all the resources (publicIP, Application Gateway etc.,)                                    |
 
+## Architecture Diagram
+
 ### Configuration of the Log Anlaytics Workspace
 1. The template expects the Subscription Id of the pre-existing Log Analytics workspace. The workspace can be deployed from the ARM template or azure CLI commands. The resource deployment bash script has the following code to complete this step
 ```
@@ -72,6 +74,33 @@ Reason for using an Ubuntu machine ->
 	  - References: https://docs.microsoft.com/en-us/azure/virtual-machines/windows/capture-image-resource
 	  - https://docs.microsoft.com/en-us/azure/virtual-machines/generalize
      - Creating a VM from the managed image (PowerShell) - https://docs.microsoft.com/en-us/azure/virtual-machines/windows/create-vm-generalized-managed
+
+## Execution of the Lab Steps
+
+## Installation of the Log Analytics Workbook
+
+## Sentinel Integration
+
+### Sentinel KQL Queries
+
+### Execution of the Sentinel Playbook for Mitigation
+
+## Mapping the Reconnaissance, XSS, SQLi and other assessment and exploitation techniques to the MITRE and Cyber Killchain frameworks
+
+### MITRE Charts
+
+## Azure Defender for Network ( IPFIX logs from Microsoft Routers, Analytics based on that, any possible mitigation that can be implemented through Security Center)
+	https://www.youtube.com/watch?v=NpT7j0oH3-o&ab_channel=MicrosoftSecurity
+	
+## Scanning for Security Vulnerabilities, detection and Mitigation - Architecture Diagram
+
+## Cost-Saving Measures
+
+## Futhering the Work
+
+
+
+
 
 
 
