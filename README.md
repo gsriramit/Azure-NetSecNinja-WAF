@@ -108,9 +108,9 @@ Data generated from the Application Gateway and/or the Azure Front Door logs are
    - For more detailed reading and walkthrough - [Threat Intelligence – TAXII and Threat Intelligence Platforms](https://docs.microsoft.com/en-us/azure/architecture/example-scenario/data/sentinel-threat-intelligence)
 3. Time series data analysis to determine IP anomaly. **Note**: This particular query uses the "Anomaly Scoring Mode" referenced in the previous section to identify the IP addresses that have exhibited anomolous behavior in a period of ~14 days
 4. Requests identified as SQLi attacks by WAF based on the anomaly score and exporting *as Entities* the URL attacked and the client IP address that the attack originated from
-   - [Path to the base orig query](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/AzureWAF/AppGwWAF-SQLiDetection.yaml)
+   - [Path to the original query](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/AzureWAF/AppGwWAF-SQLiDetection.yaml)
 5. Requests identified as XSS attacks by WAF based on the anomaly score and exporting *as Entities* the URL attacked and the client IP address that the attack originated from
-   - - [Path to the base orig query](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/AzureWAF/AppGwWAF-XSSDetection.yaml)
+   - [Path to the original query](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/AzureWAF/AppGwWAF-XSSDetection.yaml)
 
 ### Execution of the Sentinel Playbook for Mitigation
 
