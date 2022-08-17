@@ -113,13 +113,15 @@ Data generated from the Application Gateway and/or the Azure Front Door logs are
    - [Path to the original query](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/AzureWAF/AppGwWAF-XSSDetection.yaml)
 
 ### Execution of the Sentinel Playbook for Mitigation
-All of the queries documented in the previous section can be used to detect exploitations and attacks on a web application protected by WAF. In all these queries, the projections or the one of entities exported are the list of IP addresses from which the attack was triggered. Now that we know the source of the attacks, the suitable mitigation (or) repeated attack prevention would be adding the identitied IP addresses to the list of blocked IP addresses.  
+All of the queries documented in the previous section can be used to detect exploitations and attacks on a web application protected by WAF. In all these queries, the projections or the entities exported consist of the list of IP addresses from which the attack was triggered. Now that we know the source of the attacks, the suitable mitigation (or) repeated attack prevention would be adding the identitied IP addresses to the list of blocked IP addresses.  
 Sentinel Block IP Playbook - https://github.com/Azure/Azure-Network-Security/tree/master/Azure%20WAF/Playbook%20-%20WAF%20Sentinel%20Playbook%20Block%20IP  
 **Note**: The playbook needs to be configured as the response action when a Sentinel Analytics rule based alert is triggered. This way the whole process can be automated 
 
 ## Mapping the Reconnaissance, XSS, SQLi and other assessment and exploitation techniques to the MITRE and Cyber Killchain frameworks
 
-### MITRE Charts
+![image](https://user-images.githubusercontent.com/13979783/185143753-4a1e9bbc-b2d3-4426-858b-4d12c6a237bb.png)
+
+
 
 ## Azure Defender for Network ( IPFIX logs from Microsoft Routers, Analytics based on that, any possible mitigation that can be implemented through Security Center)
 	https://www.youtube.com/watch?v=NpT7j0oH3-o&ab_channel=MicrosoftSecurity
