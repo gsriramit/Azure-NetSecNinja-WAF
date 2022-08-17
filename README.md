@@ -84,8 +84,17 @@ Reason for using an Ubuntu machine ->
 ## Installation of the Log Analytics Workbook
 Azure Monitor Workbook for WAF - https://github.com/Azure/Azure-Network-Security/tree/master/Azure%20WAF/Workbook%20-%20WAF%20Monitor%20Workbook
 
-### Understanding Anomaly Score based attack detection/prevention
-
+## Understanding Anomaly Score based attack detection/prevention
+**Excerpt from the lab-step#3 documentation**    
+" Upon reviewing the Top 50 event trigger, filter by rule name we see all the rules which evaluated the POC XSS payload in the request; the Message, full details section shows that the traffic was blocked by Mandatory rule because the **Anomaly Score threshold was exceeded (Total Score: 53, XSS=35)** with XSS attack being the closest match"
+Azure WAF has rules configured as a part of the default OWASP 3.x ruleset.Each of the Incoming web request is matched against these rules. If the request violates one or more of these rules then the firewall calculates the anomaly score of the request depending on the number of the rules violated and the cumulative value of the violations(each rule violation has a "severity" and an appropriate anomaly score mapped to it)  
+The following links from the MS Documentation and a very good question on the github forum can help you make sense of the anomaly based detections and attack prevention
+1. Anomaly score in the app gateway firewall and access logs  
+https://github.com/MicrosoftDocs/azure-docs/issues/65894
+2. Understanding WAF logs
+https://docs.microsoft.com/en-us/azure/web-application-firewall/ag/web-application-firewall-troubleshoot#understanding-waf-logs  
+3. Anomaly Scoring Mode
+https://docs.microsoft.com/en-us/azure/web-application-firewall/ag/ag-overview#anomaly-scoring-mode  
 
 ## Sentinel Integration
 Integrating Azure WAF with Microsoft Sentinel i.e. configuring Azure Web Application Firewall (WAF) as a data source is an important step for us to capture all important **signals** , check for false positives, identify the patterns and possibly determine a mitigation plan based on the type of the attack detected.  
@@ -94,6 +103,14 @@ Data generated from the Application Gateway and/or the Azure Front Door logs are
 
 
 ### Sentinel KQL Queries
+1. Identifying Unique IP Addresses that have sent beyond an acceptable number (user-defined threshold) of requests to the protected web application. This can then be either analyzed further to create a future attack prevention by adding the IP address to the blocked addresses list
+2. Using the Indicators of Compromise (IOC) from Threat Intelligence data to enhance the threat hunting queries. Threat Intelligence data provides Threat indicators including URLs, file hashes, IP addresses, and other data with known threat activity like phishing, botnets, or malware 
+   - For more detailed reading and walkthrough - [Threat Intelligence – TAXII and Threat Intelligence Platforms](https://docs.microsoft.com/en-us/azure/architecture/example-scenario/data/sentinel-threat-intelligence)
+3. Time series data analysis to determine IP anomaly. **Note**: This particular query uses the "Anomaly Scoring Mode" referenced in the previous section to identify the IP addresses that have exhibited anomolous behavior in a period of ~14 days
+4. Requests identified as SQLi attacks by WAF based on the anomaly score and exporting *as Entities* the URL attacked and the client IP address that the attack originated from
+   - [Path to the base orig query](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/AzureWAF/AppGwWAF-SQLiDetection.yaml)
+5. Requests identified as XSS attacks by WAF based on the anomaly score and exporting *as Entities* the URL attacked and the client IP address that the attack originated from
+   - - [Path to the base orig query](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/AzureWAF/AppGwWAF-XSSDetection.yaml)
 
 ### Execution of the Sentinel Playbook for Mitigation
 
