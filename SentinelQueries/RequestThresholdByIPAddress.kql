@@ -1,0 +1,23 @@
+let Threshold = 200;  //Adjust the threshold to a suitable value based on Environment, Time Period.
+let AllData =  AzureDiagnostics
+| where TimeGenerated >= ago(1d)
+| where Category in ("FrontdoorWebApplicationFirewallLog","FrontDoorWebApplicationFirewallLog", "FrontdoorAccessLog", "ApplicationGatewayFirewallLog", "ApplicationGatewayAccessLog")
+| extend ClientIPAddress = iff( Category in ("FrontdoorWebApplicationFirewallLog", "FrontDoorWebApplicationFirewallLog", "ApplicationGatewayAccessLog"), clientIP_s, clientIp_s);
+// Identify the list of Unique suspicious IP addresses based on the request Threshold
+let SuspiciousIP = AzureDiagnostics
+| where TimeGenerated >= ago(1d)
+| where Category in ( "ApplicationGatewayFirewallLog", "ApplicationGatewayAccessLog", "FrontdoorWebApplicationFirewallLog", "FrontDoorWebApplicationFirewallLog", "FrontdoorAccessLog")
+| extend ClientIPAddress = iff( Category in ("FrontdoorWebApplicationFirewallLog", "FrontDoorWebApplicationFirewallLog", "ApplicationGatewayAccessLog"), clientIP_s, clientIp_s)
+| extend SessionTrackingID = iff( Category in ("FrontdoorWebApplicationFirewallLog", "FrontDoorWebApplicationFirewallLog", "FrontdoorAccessLog"), trackingReference_s, transactionId_g)
+| distinct  ClientIPAddress, SessionTrackingID
+| summarize count() by ClientIPAddress
+| where count_ > Threshold
+| distinct ClientIPAddress;
+// Prepare the Entity data [Azure Resource that was attacked and the Client IP addresses that the requests originated from]
+SuspiciousIP
+| join kind = inner ( AllData) on ClientIPAddress
+| extend SessionTrackingID = iff( Category in ("FrontdoorWebApplicationFirewallLog", "FrontDoorWebApplicationFirewallLog", "FrontdoorAccessLog"), trackingReference_s, transactionId_g)
+| summarize makeset(requestUri_s), makeset(requestQuery_s), makeset(SessionTrackingID), makeset(clientPort_d),  SessionCount = count() by ClientIPAddress, _ResourceId
+| extend HostCustomEntity =  _ResourceId, IPCustomEntity = ClientIPAddress;
+// Print the content
+SuspiciousIP

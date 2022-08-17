@@ -1,0 +1,21 @@
+ThreatIntelligenceIndicator
+| where TimeGenerated >= ago(ioc_lookBack) and ExpirationDateTime > now()
+| where Active == true
+// Picking up only IOC's that contain the entities we want
+| where isnotempty(NetworkIP) or isnotempty(EmailSourceIpAddress) or isnotempty(NetworkDestinationIP) or isnotempty(NetworkSourceIP)
+// As there is potentially more than 1 indicator type for matching IP, taking NetworkIP first, then others if that is empty.
+// Taking the first non-empty value based on potential IOC match availability
+| extend TI_ipEntity = iff(isnotempty(NetworkIP), NetworkIP, NetworkDestinationIP)
+| extend TI_ipEntity = iff(isempty(TI_ipEntity) and isnotempty(NetworkSourceIP), NetworkSourceIP, TI_ipEntity)
+| extend TI_ipEntity = iff(isempty(TI_ipEntity) and isnotempty(EmailSourceIpAddress), EmailSourceIpAddress, TI_ipEntity)
+| join (
+AzureDiagnostics 
+| where TimeGenerated >= ago(dt_lookBack)
+| where Category in ( 'ApplicationGatewayFirewallLog', 'FrontdoorWebApplicationFirewallLog', 'FrontDoorWebApplicationFirewallLog', 'ApplicationGatewayAccessLog', 'FrontdoorAccessLog')
+| where isnotempty(clientIP_s) or isnotempty(clientIp_s)
+| extend ClientIPAddress = iff( Category in ("FrontdoorWebApplicationFirewallLog", "FrontDoorWebApplicationFirewallLog", "ApplicationGatewayAccessLog"), clientIP_s, clientIp_s)
+| extend WAF_TimeGenerated = TimeGenerated
+)
+on $left.TI_ipEntity == $right.ClientIPAddress
+| project TimeGenerated, ClientIPAddress, Description, ActivityGroupNames, IndicatorId, ThreatType, ExpirationDateTime, ConfidenceScore,_ResourceId, WAF_TimeGenerated, Category, ResourceGroup, SubscriptionId, ResourceType,OperationName, requestUri_s, ruleName_s, host_s, clientPort_d,details_data_s, Message, ruleSetType_s, policyScope_s
+| extend IPCustomEntity = ClientIPAddress, HostCustomEntity = _ResourceId, timestamp = WAF_TimeGenerated, URLCustomEntity = requestUri_s
