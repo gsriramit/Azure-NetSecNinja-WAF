@@ -17,6 +17,7 @@ The deployment templates used in this repository are modified from the original 
 | Diagnostics Settings         | Enabled for all the resources (publicIP, Application Gateway etc.,)                                    |
 
 ## Architecture Diagram
+![NetworkSecurityNinja](https://user-images.githubusercontent.com/13979783/185557892-e0054c41-c040-4111-97ff-d02a67edd2ea.png)
 
 ### Configuration of the Log Anlaytics Workspace
 1. The template expects the Subscription Id of the pre-existing Log Analytics workspace. The workspace can be deployed from the ARM template or azure CLI commands. The resource deployment bash script has the following code to complete this step
