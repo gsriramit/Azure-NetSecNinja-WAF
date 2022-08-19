@@ -1,0 +1,11 @@
+let requestThreshold=100;
+AzureDiagnostics
+| where Category == "ApplicationGatewayFirewallLog" or Category == "ApplicationGatewayAccessLog"
+| where action_s == "Blocked"
+| summarize StartTime = min(TimeGenerated), EndTime = max(TimeGenerated), count() by clientIp_s, host_s, _ResourceId, action_s, Category
+| where count_ >= requestThreshold
+| extend Category, clientIp_s, host_s, count_, _ResourceId, action_s
+| extend IPCustomEntity = clientIp_s
+| extend URLCustomEntity = host_s
+| extend HostCustomEntity = _ResourceId
+| extend Action = action_s
