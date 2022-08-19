@@ -17,6 +17,7 @@ The deployment templates used in this repository are modified from the original 
 | Diagnostics Settings         | Enabled for all the resources (publicIP, Application Gateway etc.,)                                    |
 
 ## Architecture Diagram
+![NetworkSecurityNinja](https://user-images.githubusercontent.com/13979783/185557892-e0054c41-c040-4111-97ff-d02a67edd2ea.png)
 
 ### Configuration of the Log Anlaytics Workspace
 1. The template expects the Subscription Id of the pre-existing Log Analytics workspace. The workspace can be deployed from the ARM template or azure CLI commands. The resource deployment bash script has the following code to complete this step
@@ -113,20 +114,30 @@ Data generated from the Application Gateway and/or the Azure Front Door logs are
    - [Path to the original query](https://github.com/Azure/Azure-Sentinel/blob/master/Detections/AzureWAF/AppGwWAF-XSSDetection.yaml)
 
 ### Execution of the Sentinel Playbook for Mitigation
+All of the queries documented in the previous section can be used to detect exploitations and attacks on a web application protected by WAF. In all these queries, the projections or the entities exported consist of the list of IP addresses from which the attack was triggered. Now that we know the source of the attacks, the suitable mitigation (or) repeated attack prevention would be adding the identitied IP addresses to the list of blocked IP addresses.  
+Sentinel Block IP Playbook - https://github.com/Azure/Azure-Network-Security/tree/master/Azure%20WAF/Playbook%20-%20WAF%20Sentinel%20Playbook%20Block%20IP  
+**Note**: The playbook needs to be configured as the response action when a Sentinel Analytics rule based alert is triggered. This way the whole process can be automated 
 
 ## Mapping the Reconnaissance, XSS, SQLi and other assessment and exploitation techniques to the MITRE and Cyber Killchain frameworks
 
-### MITRE Charts
+![image](https://user-images.githubusercontent.com/13979783/185143753-4a1e9bbc-b2d3-4426-858b-4d12c6a237bb.png)
 
-## Azure Defender for Network ( IPFIX logs from Microsoft Routers, Analytics based on that, any possible mitigation that can be implemented through Security Center)
-	https://www.youtube.com/watch?v=NpT7j0oH3-o&ab_channel=MicrosoftSecurity
+## Azure Defender for Network  
+IPFIX logs from Microsoft Routers, Analytics based on that, any possible mitigation that can be implemented through the Security Center  
+https://www.youtube.com/watch?v=NpT7j0oH3-o&ab_channel=MicrosoftSecurity
 	
 ## Scanning for Security Vulnerabilities, detection and Mitigation - Architecture Diagram
+TBD 
 
 ## Cost-Saving Measures
-
+- Delete and recreate Azure Bastion hosts on need basis
+- Turn-off or deallocate the Attack Simulation Virtual Machine once the tests are executed and you are working on analyzing the data
+- Delete the rg-netsecninja resource group at the end of the day. Use the deployResources.sh file to recreate the entire resource group whenever required. **Note**: It is better not to delete the rg-secops resource group as the Log Analytics Workspace and the security events captured would also be lost with it
+- The Azure App-service hosting the attacked website can also be turned off when not used
+ 
 ## Futhering the Work
-
+- Use of the tools available in *Metaspolit Framework* to perform more of the web-application attacks
+- A very good training series recording from the INFOSEC TRAIN channel - [Web Application Testing | OWASP Top 10 | Cyber Security Training](https://www.youtube.com/watch?v=ZstyFyfS3g4&list=PLQL1JGGe-t0tfWbaGzQYdUfRRmc6-CSMz&index=6&t=12270s&ab_channel=INFOSECTRAIN)
 
 
 
