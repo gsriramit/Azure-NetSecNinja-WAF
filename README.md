@@ -122,17 +122,22 @@ Sentinel Block IP Playbook - https://github.com/Azure/Azure-Network-Security/tre
 
 ![image](https://user-images.githubusercontent.com/13979783/185143753-4a1e9bbc-b2d3-4426-858b-4d12c6a237bb.png)
 
-
-
-## Azure Defender for Network ( IPFIX logs from Microsoft Routers, Analytics based on that, any possible mitigation that can be implemented through Security Center)
-	https://www.youtube.com/watch?v=NpT7j0oH3-o&ab_channel=MicrosoftSecurity
+## Azure Defender for Network  
+IPFIX logs from Microsoft Routers, Analytics based on that, any possible mitigation that can be implemented through the Security Center  
+https://www.youtube.com/watch?v=NpT7j0oH3-o&ab_channel=MicrosoftSecurity
 	
 ## Scanning for Security Vulnerabilities, detection and Mitigation - Architecture Diagram
+TBD 
 
 ## Cost-Saving Measures
-
+- Delete and recreate Azure Bastion hosts on need basis
+- Turn-off or deallocate the Attack Simulation Virtual Machine once the tests are executed and you are working on analyzing the data
+- Delete the rg-netsecninja resource group at the end of the day. Use the deployResources.sh file to recreate the entire resource group whenever required. **Note**: It is better not to delete the rg-secops resource group as the Log Analytics Workspace and the security events captured would also be lost with it
+- The Azure App-service hosting the attacked website can also be turned off when not used
+ 
 ## Futhering the Work
-
+- Use of the tools available in *Metaspolit Framework* to perform more of the web-application attacks
+- A very good training series recording from the INFOSEC TRAIN channel - [Web Application Testing | OWASP Top 10 | Cyber Security Training](https://www.youtube.com/watch?v=ZstyFyfS3g4&list=PLQL1JGGe-t0tfWbaGzQYdUfRRmc6-CSMz&index=6&t=12270s&ab_channel=INFOSECTRAIN)
 
 
 
