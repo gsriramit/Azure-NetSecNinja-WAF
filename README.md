@@ -49,9 +49,9 @@ Image Reference to be used in the ARM template
 "sku": "ntg_kali_linux_2022",
 "version": "latest"
 ```
-### Installation of xRDP and Security Tools in an Ubuntu Machines
+### Installation of xRDP and Security Tools in Ubuntu Machines
 Reason for using an Ubuntu machine ->
-1. The Parrot OS and Linux Machines were kind of expensive if used for longer periods of time (costed me ~ INR 27 per hour). If you are diligent of the use of the machines then you can use any of those offerings from the Marketplace. The machines 
+1. The Parrot OS and Linux Machines were kind of expensive if used for longer periods of time (costed me ~ INR 27 per hour). If you are diligent about the use of the machines then you can use any of those offerings from the Marketplace. 
 2. Both the machines come with the security testing and other related tools built into them and hence require a minimum of 2-4 vCPU and 16GB of RAM to be usable. These VM's base price are comparitively higher than the B2S machines that have been used in the base template. The hourly expenses can quickly escalate if not attended to
 
 #### Basic Setup Information
